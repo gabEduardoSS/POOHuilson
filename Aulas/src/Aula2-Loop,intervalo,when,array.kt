@@ -49,4 +49,5 @@ fun colecoes(){
         println("ALFA Index: $i, Valor: ${alfabeto[i]}")
         if(i in numerosPares.indices)println("NUM Index: $i, Valor: ${numerosPares[i]}")
     }
+
 }
