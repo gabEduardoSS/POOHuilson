@@ -1,4 +1,4 @@
-var produtos: MutableList<MutableMap<String, Double>> = mutableListOf(mutableMapOf("Arroz" to 5.5))
+var produtos: MutableList<MutableMap<String, Double>> = mutableListOf()
 var opt: Int = 0
 
 fun main(){
@@ -12,7 +12,8 @@ fun main(){
             when(opt){
                 1 -> addProduto()
                 2 -> remProduto()
-                6 -> mostrarProdutos()
+                3 -> alterarPreco()
+                4 -> mostrarProdutos()
                 else -> println("Opção inválida")
             }
         }
@@ -25,7 +26,8 @@ fun header(){
     println("--= SUPERMERCADO =--")
     println("1 - Adicionar Produto")
     println("2 - Remover Produto")
-    println("6 - Mostrar Estoque")
+    println("3 - Alterar Preço")
+    println("4 - Mostrar Estoque")
 
     print("Escolha uma das opções(ou -1 para sair): ")
 }
@@ -58,10 +60,12 @@ fun alterarPreco(){
     val produtoIdx: Int = readln().toInt() - 1
 
     if(produtoIdx in produtos.indices){
-        produtos[produtoIdx].keys.forEach{nome ->
-            println("Produto: $nome")
+        produtos[produtoIdx].forEach{produto ->
+            println("Produto: $produto")
             print("Preço: ")
             val preco:Double = readln().replace(",", ".").toDouble()
+            produtos[produtoIdx][produto.key] = preco
+            println("Preço do produto ${produto.key} alterado com sucesso")
         }
     } else{
         println("Produto não consta no sistema, retornando ao menu")
