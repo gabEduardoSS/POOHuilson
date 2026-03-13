@@ -6,7 +6,7 @@ fun main(){
 
         header()
         opt = readln().toInt()
-        if(produtos.isEmpty() && opt!=1){
+        if(produtos.isEmpty() && opt != 1){
             println("Não há produtos cadastrados, utilize o menu de cadastro(opção 1)")
         } else{
             when(opt){
