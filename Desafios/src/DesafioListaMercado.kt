@@ -61,7 +61,7 @@ fun alterarPreco(){
 
     if(produtoIdx in produtos.indices){
         produtos[produtoIdx].forEach{produto ->
-            println("Produto: $produto")
+            println("Produto: ${produto.key}")
             print("Preço: ")
             val preco:Double = readln().replace(",", ".").toDouble()
             produtos[produtoIdx][produto.key] = preco
