@@ -1,12 +1,12 @@
 package DesafioRPG
 
-private class Personagem (
+open class Personagem (
     val nome: String,
-    val força: Int,
+    val forca: Int,
     val velocidade: Int,
     val vida: Int
 ){
-    fun usarPoder(){
+    open fun usarPoder(){
         print("O herói $nome usou seu poder")
     }
 
@@ -16,7 +16,7 @@ private class Personagem (
      * adversário*/
      fun atacar(velocidadeInimigo: Double): Int{
         if(velocidade > velocidadeInimigo){
-            return força
+            return forca
         }
          return 0
      }
@@ -26,10 +26,47 @@ private class Personagem (
      * do herói é maior que a Força do adversário
      * */
      fun defender(forcaInimigo: Int): Boolean{
-         if(velocidade > forcaInimigo){
-             return true
-         }
-         return false
+         return velocidade > forcaInimigo
      }
 
+    open fun returnAtributoEsp(){
+
+    }
+
+}
+
+class Mago(
+    nome: String,
+    forca: Int,
+    velocidade: Int,
+    vida: Int,
+    val Magia: Int
+) : Personagem(nome, forca, velocidade, vida) {
+    override fun usarPoder(){
+
+    }
+}
+
+class Guerreiro(
+    nome: String,
+    forca: Int,
+    velocidade: Int,
+    vida: Int,
+    val defesa: Int
+) : Personagem(nome, forca, velocidade, vida) {
+    override fun usarPoder() {
+
+    }
+}
+
+class Ladino(
+    nome: String,
+    forca: Int,
+    velocidade: Int,
+    vida: Int,
+    val sagacidade: Int
+) : Personagem(nome, forca, velocidade, vida) {
+    override fun usarPoder(){
+
+    }
 }
