@@ -1,72 +1,44 @@
 package DesafioRPG
 
-open class Personagem (
+open class Personagem(
     val nome: String,
-    val forca: Int,
+    var forca: Int,
     val velocidade: Int,
-    val vida: Int
-){
-    open fun usarPoder(){
-        print("O herói $nome usou seu poder")
+    var vida: Int
+) {
+    open fun usarPoder(): String {
+        return "⚡ $nome usou seu poder!"
     }
 
-     /*
-     * Para a função de ataque, calcule quem é o mais
-     * rápido, desconte o valor da Força da Vida do
-     * adversário*/
-     fun atacar(velocidadeInimigo: Double): Int{
-        if(velocidade > velocidadeInimigo){
-            return forca
+    fun atacar(inimigo: Personagem): Int {
+        return if (velocidade > inimigo.velocidade) {
+            val dano = forca
+            inimigo.receberDano(dano)
+            println("⚔️  $nome atacou ${inimigo.nome} e causou $dano de dano!")
+            dano
+        } else {
+            println("💨 ${inimigo.nome} é mais rápido e esquivou do ataque de $nome!")
+            0
         }
-         return 0
-     }
-
-     /**
-     * Para a função de defensa, calcule se a Velocidade
-     * do herói é maior que a Força do adversário
-     * */
-     fun defender(forcaInimigo: Int): Boolean{
-         return velocidade > forcaInimigo
-     }
-
-    open fun returnAtributoEsp(){
-
     }
 
-}
-
-class Mago(
-    nome: String,
-    forca: Int,
-    velocidade: Int,
-    vida: Int,
-    val Magia: Int
-) : Personagem(nome, forca, velocidade, vida) {
-    override fun usarPoder(){
-
+    fun defender(inimigo: Personagem): Boolean {
+        val defendeu = velocidade > inimigo.forca
+        if (defendeu) {
+            println("🛡️  $nome defendeu o ataque de ${inimigo.nome}!")
+        } else {
+            println("💥 $nome não conseguiu defender o ataque de ${inimigo.nome}!")
+        }
+        return defendeu
     }
-}
 
-class Guerreiro(
-    nome: String,
-    forca: Int,
-    velocidade: Int,
-    vida: Int,
-    val defesa: Int
-) : Personagem(nome, forca, velocidade, vida) {
-    override fun usarPoder() {
-
+    open fun receberDano(dano: Int) {
+        vida = maxOf(0, vida - dano)
     }
-}
 
-class Ladino(
-    nome: String,
-    forca: Int,
-    velocidade: Int,
-    vida: Int,
-    val sagacidade: Int
-) : Personagem(nome, forca, velocidade, vida) {
-    override fun usarPoder(){
+    fun estaVivo(): Boolean = vida > 0
 
+    open fun status(): String {
+        return "[$nome | ❤️ Vida: $vida | ⚔️ Força: $forca | 💨 Velocidade: $velocidade]"
     }
 }
